@@ -30,7 +30,7 @@ input,textarea{font:inherit;color:inherit}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,transparent 45%,rgba(5,6,15,.75) 100%)}
 
 /* ---------- top bar ---------- */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:18px var(--gutter);mix-blend-mode:normal;pointer-events:none}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:18px var(--gutter) 26px;pointer-events:none;background:linear-gradient(rgba(5,6,15,.92),rgba(5,6,15,.6) 60%,rgba(5,6,15,0))}
 .topbar>*{pointer-events:auto}
 .brand{font-family:var(--serif);font-weight:500;letter-spacing:.34em;font-size:15px;text-transform:uppercase;text-decoration:none;color:var(--ink)}
 .brand small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--gold);margin-top:3px;font-weight:400}
@@ -138,7 +138,7 @@ footer{position:relative;z-index:2;padding:60px var(--gutter) 40px;border-top:1p
 footer span b{color:var(--ink-dim);font-weight:400}
 
 /* ---------- atelier ---------- */
-.atelier{min-height:100svh;padding:140px 0 90px}
+.atelier{min-height:100svh;padding:140px var(--gutter) 90px}
 .atelier .head{max-width:640px}
 .atelier .card{margin-top:54px;border:1px solid var(--gold-soft);display:grid;grid-template-columns:1.05fr 1fr;background:rgba(5,6,15,.6);backdrop-filter:blur(10px)}
 @media(max-width:860px){.atelier .card{grid-template-columns:1fr}}
@@ -160,7 +160,7 @@ footer span b{color:var(--ink-dim);font-weight:400}
 .atelier .actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:30px}
 
 /* ---------- checkout ---------- */
-.checkout{min-height:100svh;padding:140px 0 100px}
+.checkout{min-height:100svh;padding:140px var(--gutter) 100px}
 .checkout .cols{display:grid;grid-template-columns:1.2fr .9fr;gap:clamp(30px,5vw,80px);margin-top:50px;align-items:start}
 @media(max-width:900px){.checkout .cols{grid-template-columns:1fr}.checkout .summary{order:-1}}
 .demo{display:inline-flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid rgba(143,184,255,.35);color:var(--ion);font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
@@ -193,6 +193,7 @@ footer span b{color:var(--ink-dim);font-weight:400}
 .summary .lines div span:first-child{color:var(--ink-dim)}
 .summary .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;font-size:22px}
 .summary .total b{font-size:34px;font-weight:300}
+.summary .reserve{margin-top:14px;padding:10px 12px;border:1px solid var(--gold-faint);font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;font-variant-numeric:tabular-nums}
 .summary .deliv{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);line-height:1.9}
 .summary .deliv b{color:var(--gold);font-weight:400}
 .err{margin-top:16px;color:var(--danger);font-family:var(--mono);font-size:11px;letter-spacing:.1em;display:none}
@@ -218,6 +219,12 @@ footer span b{color:var(--ink-dim);font-weight:400}
 .revealv .r3{font-size:clamp(24px,3.4vw,40px);font-style:italic;font-weight:300;margin-top:30px;opacity:0;transition:opacity 1.4s}
 .revealv .r4{margin-top:54px;opacity:0;transition:opacity 1.2s}
 .revealv.s1 .r1{opacity:1}.revealv.s2 .r2{opacity:1;letter-spacing:.06em}.revealv.s3 .r3{opacity:1}.revealv.s4 .r4{opacity:1}
+.revealv .seal{position:absolute;right:clamp(14px,8vw,130px);bottom:clamp(60px,14vh,150px);width:150px;height:150px;border-radius:50%;border:2px solid var(--gold);box-shadow:inset 0 0 0 5px transparent,inset 0 0 0 6px var(--gold-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);line-height:1.8;transform:rotate(-12deg) scale(4);opacity:0;pointer-events:none}
+@media(max-width:720px){.revealv .seal{width:110px;height:110px;font-size:8px;right:12px;bottom:auto;top:90px}}
+.revealv.s2b .seal{animation:stamp .55s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes stamp{0%{transform:rotate(-12deg) scale(4);opacity:0}55%{transform:rotate(-12deg) scale(.9);opacity:1}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+.revealv.shake{animation:shake .45s}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-7px,5px)}40%{transform:translate(6px,-4px)}60%{transform:translate(-4px,2px)}80%{transform:translate(2px,-1px)}}
 .flash{position:fixed;inset:0;background:#fff8e6;opacity:0;pointer-events:none;z-index:9;transition:opacity 2.2s}
 .flash.go{opacity:.95;transition:opacity .05s}
 
@@ -452,6 +459,7 @@ body[data-view="observatoire"] .obs{display:block}
           <div><span>Certificat</span><span>Inclus</span></div>
         </div>
         <div class="total"><span>Total TTC</span><b id="s-total"></b></div>
+        <div class="reserve" id="s-reserve"></div>
         <div class="deliv">Livraison <b>immédiate</b>, dans votre ciel<br>Rétractation <b>impossible</b> — on ne rend pas une comète</div>
       </aside>
     </div>
@@ -481,6 +489,7 @@ body[data-view="observatoire"] .obs{display:block}
     <div class="r1">Registre Périhélie — entrée n° <span id="r-num"></span></div>
     <div class="r2" id="r-desig"></div>
     <div class="r3">Elle est à vous.</div>
+    <div class="seal">Registre<br>Périhélie<br>n° <span id="r-num2"></span></div>
     <div class="r4"><a class="btn primary" href="#/observatoire">Entrer dans mon observatoire <span class="arrow">→</span></a></div>
   </div>
 </section>
@@ -638,14 +647,14 @@ function drawAmbient(t) {
   drawComet(x, y, (ambient.x1 - ambient.x0) * W, (ambient.y1 - ambient.y0) * H, 160, 1.4, 215, 40, a);
 }
 function drawOrbit(c2, c, phase, w, h, opts) {
-  opts = opts || {}; const cx = w / 2, cy = h / 2; const a = Math.min(w, h) * (opts.scale || .36); const b = a * Math.sqrt(1 - c.e * c.e);
+  opts = opts || {}; const cx = w / 2, cy = h / 2; const a = Math.min(w, h) * (opts.scale || .36); const b = a * Math.sqrt(1 - c.e * c.e); const fx = a * c.e;
   c2.save(); c2.translate(cx, cy); c2.rotate(opts.rot != null ? opts.rot : c.tilt);
-  c2.strokeStyle = 'rgba(212,165,74,.32)'; c2.lineWidth = 1; c2.setLineDash([3, 6]); c2.beginPath(); c2.ellipse(-a * c.e, 0, a, b, 0, 0, Math.PI * 2); c2.stroke(); c2.setLineDash([]);
-  c2.strokeStyle = 'rgba(212,165,74,.14)'; c2.beginPath(); c2.moveTo(-a * c.e - a, 0); c2.lineTo(-a * c.e + a, 0); c2.stroke();
-  const sg = c2.createRadialGradient(0, 0, 0, 0, 0, 14); sg.addColorStop(0, 'rgba(255,240,200,1)'); sg.addColorStop(.3, 'rgba(212,165,74,.7)'); sg.addColorStop(1, 'rgba(212,165,74,0)'); c2.fillStyle = sg; c2.beginPath(); c2.arc(0, 0, 14, 0, Math.PI * 2); c2.fill();
-  c2.fillStyle = 'rgba(233,228,214,.5)'; c2.font = '9px IBM Plex Mono'; c2.fillText('PÉRIHÉLIE', a * (1 - c.e) + 8, 4);
-  const k = kepler(phase, c.e); const px = a * k.x, py = a * k.y; const dist = Math.hypot(px, py) / a; const len = Math.max(10, 90 * (1 - c.e) / Math.max(dist, 0.05)) * c.tail;
-  const ux = px / (Math.hypot(px, py) || 1), uy = py / (Math.hypot(px, py) || 1);
+  c2.strokeStyle = 'rgba(212,165,74,.34)'; c2.lineWidth = 1; c2.setLineDash([3, 6]); c2.beginPath(); c2.ellipse(0, 0, a, b, 0, 0, Math.PI * 2); c2.stroke(); c2.setLineDash([]);
+  c2.strokeStyle = 'rgba(212,165,74,.14)'; c2.beginPath(); c2.moveTo(-a, 0); c2.lineTo(a, 0); c2.stroke();
+  const sg = c2.createRadialGradient(fx, 0, 0, fx, 0, 14); sg.addColorStop(0, 'rgba(255,240,200,1)'); sg.addColorStop(.3, 'rgba(212,165,74,.7)'); sg.addColorStop(1, 'rgba(212,165,74,0)'); c2.fillStyle = sg; c2.beginPath(); c2.arc(fx, 0, 14, 0, Math.PI * 2); c2.fill();
+  c2.fillStyle = 'rgba(233,228,214,.5)'; c2.font = '9px IBM Plex Mono'; c2.fillText('PÉRIHÉLIE', a + 8, 4);
+  const k = kepler(phase, c.e); const px = a * (k.x + c.e), py = a * k.y; const dx = px - fx, dy = py; const dn = Math.hypot(dx, dy) || 1; const dist = dn / a; const len = Math.max(10, 90 * (1 - c.e) / Math.max(dist, 0.05)) * c.tail;
+  const ux = dx / dn, uy = dy / dn;
   const g = c2.createLinearGradient(px, py, px + ux * len, py + uy * len); g.addColorStop(0, `hsla(${c.hue},90%,80%,.75)`); g.addColorStop(1, `hsla(${c.hue},90%,80%,0)`); c2.strokeStyle = g; c2.lineWidth = 2.2; c2.lineCap = 'round'; c2.beginPath(); c2.moveTo(px, py); c2.lineTo(px + ux * len, py + uy * len); c2.stroke();
   const g2 = c2.createRadialGradient(px, py, 0, px, py, 9); g2.addColorStop(0, 'rgba(255,250,235,1)'); g2.addColorStop(1, 'rgba(255,250,235,0)'); c2.fillStyle = g2; c2.beginPath(); c2.arc(px, py, 9, 0, Math.PI * 2); c2.fill();
   c2.restore();
@@ -717,6 +726,7 @@ function renderCheckout() {
   const t = TIERS[pending.tier]; const c = previewComet && previewComet.seed === pending.seed ? previewComet : (previewComet = generateComet(pending.seed, pending.tier));
   $('#s-desig').textContent = desig(c, surnameFrom($('#f-name').value)); $('#s-nick').textContent = c.nick; $('#s-tier').textContent = t.name; $('#s-period').textContent = t.short; $('#s-total').textContent = fmtPrice(t.price); $('#f-amount').textContent = fmtPrice(t.price);
   $('#f-err').classList.remove('show');
+  if (!pending.reserveUntil) { pending.reserveUntil = Date.now() + 10 * 60 * 1000; savePending(pending); }
 }
 $('#f-name').addEventListener('input', e => { const s = surnameFrom(e.target.value); $('#f-name-hint').textContent = s ? `Désignation officielle : ${desig(previewComet, s)}` : 'Exemple : C/2026 S3 (Votre nom)'; $('#s-desig').textContent = desig(previewComet, s); e.target.classList.remove('bad'); });
 $('#f-card').addEventListener('input', e => { const v = e.target.value.replace(/\D/g, '').slice(0, 16); e.target.value = v.replace(/(.{4})/g, '$1 ').trim(); e.target.classList.remove('bad'); $('#f-brand').textContent = v.startsWith('4') ? 'Visa (simulation)' : /^5[1-5]/.test(v) ? 'Mastercard (simulation)' : /^3[47]/.test(v) ? 'American Express (simulation)' : 'Visa · Mastercard · Amex acceptées (simulation)'; });
@@ -752,14 +762,20 @@ function finalize(name) {
 
 /* ---------- reveal ---------- */
 function playReveal() {
-  const r = $('#revealv'); r.className = 'revealv'; $('#r-num').textContent = owned.regNum; $('#r-desig').innerHTML = desigHTML(owned.comet, owned.name);
+  const r = $('#revealv'); r.className = 'revealv'; $('#r-num').textContent = owned.regNum; $('#r-num2').textContent = owned.regNum; $('#r-desig').innerHTML = desigHTML(owned.comet, owned.name);
   const fl = $('#flash'); fl.classList.add('go'); setTimeout(() => fl.classList.remove('go'), 80);
-  setTimeout(() => r.classList.add('s1'), 900); setTimeout(() => r.classList.add('s2'), 2200); setTimeout(() => r.classList.add('s3'), 4600); setTimeout(() => r.classList.add('s4'), 6200);
+  setTimeout(() => r.classList.add('s1'), 900); setTimeout(() => r.classList.add('s2'), 2200); setTimeout(() => { r.classList.add('s2b'); setTimeout(() => r.classList.add('shake'), 300); }, 3600); setTimeout(() => r.classList.add('s3'), 4600); setTimeout(() => r.classList.add('s4'), 6200);
 }
 
 /* ---------- observatory ---------- */
 let lastCd = '', statusShown = null, panelOpen = true, currentTab = 'journal';
-function enterObservatory() { renderObsStatic(); renderJournal(); renderCapsules(); $('#set-nick').value = owned.nick; setPanel(true); }
+function enterObservatory() {
+  renderObsStatic(); renderJournal(); renderCapsules(); $('#set-nick').value = owned.nick; setPanel(true);
+  const now = Date.now(), last = owned.lastVisit; const info = passInfo(owned, now);
+  if (last && now - last > 60000 && !info.inPass) { const missed = info.count - passInfo(owned, last).count; const km = 31 * (now - last) / 1000; const kmTxt = km >= 1e6 ? (km / 1e6).toLocaleString('fr-FR', { maximumFractionDigits: 1 }) + ' millions de km' : Math.round(km).toLocaleString('fr-FR') + ' km'; showStatus('Depuis votre dernière visite', `Elle a parcouru ${kmTxt}. ` + (missed > 0 ? `Elle est passée ${missed} fois sans vous.` : 'Elle vous attendait.'), 8000); }
+  owned.lastVisit = now; save(owned);
+}
+function showStatus(a, b, ms) { statusShown = 'absence'; $('#st1').textContent = a; $('#st2').textContent = b; $('#status').classList.add('show'); setTimeout(() => { if (statusShown === 'absence') { statusShown = null; $('#status').classList.remove('show'); } }, ms); }
 function renderObsStatic() { const t = TIERS[owned.tier]; $('#o-desig').innerHTML = desigHTML(owned.comet, owned.name); $('#o-nick').textContent = owned.nick; $('#o-meta').innerHTML = `${t.name} · ${t.short}<br>Adoptée le ${fmtDate(owned.adoptedAt)}<br>Registre n° ${owned.regNum} · ${owned.comet.ra} · ${owned.comet.dec}`; }
 function setPanel(open) { panelOpen = open; $('#panel').classList.toggle('open', open); $('#panel-toggle').textContent = open ? 'Replier ▾' : 'Déplier ▴'; document.documentElement.style.setProperty('--panel-h', ($('#panel').offsetHeight) + 'px'); }
 $('#panel .tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.tab === '_close') { setPanel(!panelOpen); return; } currentTab = b.dataset.tab; $$('#panel .tabs button').forEach(x => x.classList.toggle('on', x === b)); $$('#panel .pane').forEach(p => p.classList.toggle('on', p.dataset.pane === currentTab)); if (!panelOpen) setPanel(true); });
@@ -808,7 +824,7 @@ function updateObservatory(now) {
   } else {
     drawOrbit(ctx, owned.comet, info.phase, W, H, { scale: W < 700 ? .3 : .34, rot: owned.comet.tilt * .2 });
     const cd = fmtCountdown(info.toNext); if (lastCd !== cd) { lastCd = cd; $('#cd-label').textContent = info.count === 0 ? 'Passage inaugural dans' : `Passage n° ${info.upcoming} dans`; $('#cd').innerHTML = cd; $('#cd-sub').textContent = (info.count === 0 ? 'En approche · ' : `${info.count} passage${info.count > 1 ? 's' : ''} consigné${info.count > 1 ? 's' : ''} · `) + fmtDateShort(info.next); }
-    if (statusShown && info.toNext > 2000) { statusShown = null; $('#status').classList.remove('show'); renderJournal(); renderCapsules(); }
+    if (statusShown && statusShown !== 'absence' && info.toNext > 2000) { statusShown = null; $('#status').classList.remove('show'); renderJournal(); renderCapsules(); }
     document.body.classList.toggle('imminent', info.toNext < 120000);
   }
 }
@@ -817,8 +833,9 @@ function updateObservatory(now) {
 let lastJournalCount = -1;
 function frame(t) {
   const now = Date.now();
-  if (view === 'observatoire' && owned) { drawStars(t, 1.15); updateObservatory(now); }
+  if (view === 'observatoire' && owned) { drawStars(t, 1.15); updateObservatory(now); if (now - (owned.lastVisit || 0) > 30000) { owned.lastVisit = now; save(owned); } }
   else { drawStars(t, 1); if (view === 'home' || view === 'atelier' || view === 'checkout') drawAmbient(t); if (view === 'atelier' && previewComet) drawPreview(t); }
+  if (view === 'checkout' && pending && pending.reserveUntil) { const left = pending.reserveUntil - now; if (left <= 0) { pending = { tier: pending.tier, seed: newSeed() }; savePending(pending); toast('Réservation expirée. Une autre comète vous a été attribuée.'); location.hash = '#/atelier'; } else { const s = `Réservée pour vous — ${pad(Math.floor(left / 60000))}:${pad(Math.floor(left / 1000) % 60)}`; const el = $('#s-reserve'); if (el.textContent !== s) el.textContent = s; } }
   if (owned && view !== 'observatoire') { const info = passInfo(owned, now); document.body.classList.toggle('imminent', info.inPass || info.toNext < 120000); const ob = $('#ob-line'); if (view === 'home' && ob) { const s = info.inPass ? `Passage n° ${info.index} en cours — <b>maintenant</b>` : `${esc(desig(owned.comet, owned.name))} — prochain passage dans <b>${fmtCountdown(info.toNext)}</b>`; if (ob.dataset.s !== s) { ob.dataset.s = s; ob.innerHTML = s; } } }
   requestAnimationFrame(frame);
 }
