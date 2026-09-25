@@ -35,7 +35,7 @@ input,textarea{font:inherit;color:inherit}
 .brand{font-family:var(--serif);font-weight:500;letter-spacing:.34em;font-size:15px;text-transform:uppercase;text-decoration:none;color:var(--ink)}
 .brand small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--gold);margin-top:3px;font-weight:400}
 .nav{display:flex;gap:26px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
-.nav a{text-decoration:none;color:var(--ink-dim);transition:color .3s}
+.nav a{text-decoration:none;color:var(--ink-dim);transition:color .3s;display:inline-flex;align-items:center;padding:14px 6px;margin:-14px -6px}
 .nav a:hover{color:var(--ink)}
 .nav a.obs{color:var(--gold);display:none;align-items:center;gap:8px}
 body.owned .nav a.obs{display:inline-flex}
@@ -167,7 +167,7 @@ footer span b{color:var(--ink-dim);font-weight:400}
 .demo i{width:6px;height:6px;border-radius:50%;background:var(--ion)}
 .field{margin-top:22px}
 .field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:10px}
-.field input{width:100%;background:rgba(233,228,214,.04);border:1px solid var(--gold-faint);padding:15px 16px;font-family:var(--mono);font-size:15px;letter-spacing:.06em;color:var(--ink);outline:none;transition:border-color .3s;border-radius:0;-webkit-appearance:none}
+.field input{width:100%;background:rgba(233,228,214,.04);border:1px solid var(--gold-faint);padding:15px 16px;font-family:var(--mono);font-size:16px;letter-spacing:.06em;color:var(--ink);outline:none;transition:border-color .3s;border-radius:0;-webkit-appearance:none}
 .field input:focus{border-color:var(--gold)}
 .field input.bad{border-color:var(--danger)}
 .field .hint{margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-faint)}
@@ -219,7 +219,7 @@ footer span b{color:var(--ink-dim);font-weight:400}
 .revealv .r3{font-size:clamp(24px,3.4vw,40px);font-style:italic;font-weight:300;margin-top:30px;opacity:0;transition:opacity 1.4s}
 .revealv .r4{margin-top:54px;opacity:0;transition:opacity 1.2s}
 .revealv.s1 .r1{opacity:1}.revealv.s2 .r2{opacity:1;letter-spacing:.06em}.revealv.s3 .r3{opacity:1}.revealv.s4 .r4{opacity:1}
-.revealv .seal{position:absolute;right:clamp(14px,8vw,130px);bottom:clamp(60px,14vh,150px);width:150px;height:150px;border-radius:50%;border:2px solid var(--gold);box-shadow:inset 0 0 0 5px transparent,inset 0 0 0 6px var(--gold-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);line-height:1.8;transform:rotate(-12deg) scale(4);opacity:0;pointer-events:none}
+.revealv .seal{position:absolute;right:clamp(14px,8vw,130px);bottom:clamp(60px,14vh,150px);width:150px;height:150px;border-radius:50%;border:2px solid var(--gold);box-shadow:inset 0 0 0 5px transparent,inset 0 0 0 6px var(--gold-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);line-height:1.8;transform:rotate(-12deg) scale(4);opacity:0;pointer-events:none;white-space:nowrap}
 @media(max-width:720px){.revealv .seal{width:110px;height:110px;font-size:8px;right:12px;bottom:auto;top:90px}}
 .revealv.s2b .seal{animation:stamp .55s cubic-bezier(.2,1.4,.4,1) forwards}
 @keyframes stamp{0%{transform:rotate(-12deg) scale(4);opacity:0}55%{transform:rotate(-12deg) scale(.9);opacity:1}100%{transform:rotate(-12deg) scale(1);opacity:1}}
@@ -247,7 +247,7 @@ body[data-view="observatoire"] .obsview{display:block}
 .hud .status.show{opacity:1}
 .hud .status .st1{font-family:var(--mono);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
 .hud .status .st2{font-size:clamp(34px,6vw,76px);font-style:italic;font-weight:300;line-height:1.05;margin-top:16px;text-shadow:0 0 30px rgba(5,6,15,.8)}
-@media(max-width:720px){.hud .tl{top:84px}.hud .tr{top:auto;bottom:calc(var(--panel-h,52px) + 18px);left:var(--gutter);right:var(--gutter);text-align:left}.hud .status{top:42%}}
+@media(max-width:720px){.hud .tl{top:84px}.hud .tr{top:auto;bottom:calc(var(--panel-h,52px) + 18px);left:var(--gutter);right:var(--gutter);text-align:left}.hud .status{top:30%}}
 
 .panel{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(rgba(5,6,15,0),rgba(5,6,15,.92) 30%);padding:0 var(--gutter);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .panel .tabs{display:flex;gap:6px;justify-content:center;border-top:1px solid var(--gold-faint);padding-top:4px;flex-wrap:wrap}
@@ -256,6 +256,7 @@ body[data-view="observatoire"] .obsview{display:block}
 .panel .tabs button:hover{color:var(--ink)}
 .panel .body{max-width:760px;margin:0 auto;height:0;overflow:hidden;transition:height .5s cubic-bezier(.2,.7,.2,1)}
 .panel.open .body{height:min(46vh,380px);overflow:auto;padding-bottom:20px}
+@media(max-width:720px){.panel .tabs{flex-wrap:nowrap;gap:4px;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch}.panel .tabs button{font-size:9px;letter-spacing:.06em;padding:14px 6px;white-space:nowrap}.panel.open .body{height:min(32vh,260px)}.btn{padding:16px 22px;letter-spacing:.16em}.atelier .info{padding:32px 22px}.atelier .actions .btn.primary{width:100%;justify-content:center;text-align:center}}
 .panel .pane{display:none;padding:14px 0 30px}
 .panel .pane.on{display:block}
 .journal{list-style:none}
@@ -265,6 +266,9 @@ body[data-view="observatoire"] .obsview{display:block}
 .journal li .s{color:var(--ink-faint);text-transform:uppercase;font-size:10px;letter-spacing:.18em;text-align:right}
 .journal li.seen .s{color:var(--ion)}
 .journal li.live .s{color:var(--gold)}
+@media(max-width:720px){.journal li{grid-template-columns:1fr auto;grid-template-areas:"k s" "d d";row-gap:4px}.journal li .k{grid-area:k}.journal li .s{grid-area:s}.journal li .d{grid-area:d}}
+.revealv .r2,.hud .tl .o-desig,.summary .s-name,.reglist li .name,.atelier .desig{overflow-wrap:anywhere}
+@media(min-width:721px) and (max-width:1000px){.hud .tr .cd{font-size:clamp(24px,3.2vw,36px)}}
 .empty{font-style:italic;color:var(--ink-dim);padding:12px 0;font-size:18px}
 .capsule-form{display:grid;gap:12px;margin-bottom:24px}
 .capsule-form textarea{width:100%;min-height:86px;background:rgba(233,228,214,.04);border:1px solid var(--gold-faint);padding:14px 16px;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--ink);outline:none;resize:vertical;border-radius:0}
@@ -376,6 +380,7 @@ body[data-view="observatoire"] .obsview{display:block}
         <details><summary>Que se passe-t-il si je meurs avant son retour ?</summary><p>Elle reviendra quand même. Si cette perspective vous inquiète, nous vous recommandons la gamme Éphémère.</p></details>
         <details><summary>Puis-je la revendre ?</summary><p>Non. On ne revend pas un rendez-vous. Périhélie ne promet aucune valeur, aucun rendement, aucune plus-value. Seulement un retour.</p></details>
         <details><summary>Où est-elle quand je ne regarde pas ?</summary><p>Exactement là où elle doit être. Votre observatoire calcule sa position en permanence, que vous soyez là ou non. Les passages manqués sont consignés au journal.</p></details>
+        <details><summary>Et si je change de téléphone ?</summary><p>Votre observatoire vit dans ce navigateur, et nulle part ailleurs. Avant de changer d'appareil ou d'effacer vos données, emportez votre fichier .perihelie depuis l'onglet Certificat : il la ramène partout. Sans lui, elle continuera de revenir — mais sans vous.</p></details>
         <details><summary>Est-ce que je paie vraiment ?</summary><p>Non. Cette boutique fonctionne en démonstration : aucun paiement réel n'est effectué, aucune carte n'est débitée, aucun compte n'est créé. La comète, en revanche, vous est bien remise.</p></details>
       </div>
       <div class="reveal" style="margin-top:60px"><a class="btn primary" href="#gammes">Choisir ma comète <span class="arrow">→</span></a></div>
@@ -460,7 +465,7 @@ body[data-view="observatoire"] .obsview{display:block}
         </div>
         <div class="total"><span>Total TTC</span><b id="s-total"></b></div>
         <div class="reserve" id="s-reserve"></div>
-        <div class="deliv">Livraison <b>immédiate</b>, dans votre ciel<br>Rétractation <b>impossible</b> — on ne rend pas une comète</div>
+        <div class="deliv">Livraison <b>immédiate</b>, dans votre ciel<br>Conservée <b>dans ce navigateur</b> — emportez votre fichier .perihelie<br>Rétractation <b>impossible</b> — on ne rend pas une comète</div>
       </aside>
     </div>
   </div>
@@ -526,12 +531,12 @@ body[data-view="observatoire"] .obsview{display:block}
           <ul class="capsules" id="capsules"></ul>
         </div>
         <div class="pane" data-pane="certificat">
-          <p class="dim" style="font-style:italic">Votre certificat d'adoption, tel qu'inscrit au Registre. Emportez-le : il permet de retrouver votre comète dans n'importe quel observatoire Périhélie.</p>
+          <p class="dim" style="font-style:italic">Votre certificat d'adoption, tel qu'inscrit au Registre. Le certificat est une image à conserver ou à encadrer. Pour retrouver votre comète sur un autre appareil, emportez votre fichier .perihelie : lui seul rouvre votre observatoire ailleurs.</p>
           <div class="cert-actions">
-            <button class="btn small primary" id="cert-png">Télécharger le certificat (PNG)</button>
-            <button class="btn small" id="cert-json">Exporter ma comète (.perihelie)</button>
+            <button class="btn small primary" id="cert-json">Emporter ma comète (.perihelie)</button>
+            <button class="btn small" id="cert-png">Certificat à encadrer (PNG)</button>
           </div>
-          <p class="mono" style="margin-top:22px">Votre observatoire est conservé dans ce navigateur. L'export permet de la retrouver ailleurs.</p>
+          <p class="mono" style="margin-top:22px">Votre observatoire est conservé dans ce navigateur. Le fichier .perihelie permet de la retrouver ailleurs.</p>
         </div>
         <div class="pane settings" data-pane="reglages">
           <div class="field"><label for="set-nick">Petit nom de votre comète</label><input id="set-nick" type="text" maxlength="40"><div class="hint">La désignation officielle, elle, ne change jamais.</div></div>
@@ -547,7 +552,7 @@ body[data-view="observatoire"] .obsview{display:block}
 <footer id="footer">
   <span><b>Périhélie</b> — Maison d'adoption de comètes</span>
   <span>Démonstration · aucun paiement réel · aucune promesse de valeur</span>
-  <span><a href="#/observatoire" id="foot-import-link" style="text-decoration:none">Retrouver ma comète (importer un certificat)</a></span>
+  <span><a href="#/observatoire" id="foot-import-link" style="text-decoration:none">Retrouver ma comète (importer mon fichier .perihelie)</a></span>
 </footer>
 <input type="file" id="import-file" accept=".perihelie,.json,application/json" class="hidden">
 <div class="toast" id="toast"></div>
@@ -560,9 +565,9 @@ const INAUGURAL_DELAY = 90 * 1000, PASS_MS = 45 * 1000, KEY = 'perihelie.comet.v
 const DAY = 86400000, YEAR = 365 * DAY;
 const TIERS = {
   ephemere: { id: 'ephemere', name: 'Éphémère', price: 39, periodMs: 11 * 60 * 1000, short: 'toutes les 11 minutes', long: 'Revient toutes les 11 minutes', desc: "Pour ceux qui n'aiment pas attendre. Elle revient avant même que vous ayez eu le temps de l'oublier.", stock: 'Série ouverte' },
-  vesperale: { id: 'vesperale', name: 'Vespérale', price: 190, periodMs: DAY, short: 'chaque jour, à la même heure', long: "Revient chaque jour, à l'heure exacte de votre adoption", desc: 'Un rendez-vous quotidien. Le même, toute votre vie. À la seconde près.', stock: 'Série limitée' },
-  annuelle: { id: 'annuelle', name: 'Annuelle', price: 1200, periodMs: YEAR, short: 'chaque année, à date fixe', long: "Revient chaque année, le jour anniversaire de votre adoption", desc: "Elle ne revient qu'une fois par an. Vous saurez exactement quand, et vous vous surprendrez à l'attendre.", stock: '120 exemplaires' },
-  seculaire: { id: 'seculaire', name: 'Séculaire', price: 76000, periodMs: 76 * YEAR, short: 'tous les 76 ans', long: 'Revient tous les 76 ans', desc: "Vous la verrez une fois. Vos petits-enfants la verront une fois. Entre les deux, elle vous appartient.", stock: 'Pièce unique — 1 exemplaire', unique: true },
+  vesperale: { id: 'vesperale', name: 'Vespérale', price: 190, periodMs: DAY, short: 'chaque jour, à la même heure', long: "Revient chaque jour, à l'heure de son passage inaugural", desc: 'Un rendez-vous quotidien. Le même, toute votre vie. À la seconde près.', stock: 'Série limitée' },
+  annuelle: { id: 'annuelle', name: 'Annuelle', price: 1200, periodMs: YEAR, short: 'chaque année, à date fixe', long: "Revient chaque année, le jour anniversaire de votre adoption", desc: "Elle ne revient qu'une fois par an. Vous saurez exactement quand, et vous vous surprendrez à l'attendre.", stock: 'Édition annuelle — une par ciel' },
+  seculaire: { id: 'seculaire', name: 'Séculaire', price: 76000, periodMs: 76 * YEAR, short: 'tous les 76 ans', long: 'Revient tous les 76 ans', desc: "Vous la verrez une fois. Vos petits-enfants la verront une fois. Entre les deux, elle vous appartient.", stock: 'Pièce unique — une par observatoire', unique: true },
 };
 const ADJ = ['Vespérale', 'Silencieuse', 'Ambrée', 'Errante', 'Fidèle', 'Pâle', 'Boréale', 'Longue', 'Souveraine', 'Discrète', 'Dorée', 'Nocturne', 'Lente', 'Patiente', 'Ivoire', 'Blanche'];
 const NOUN = ['de Septembre', 'des Brumes', 'du Solstice', "de l'Aube", 'des Marées', 'du Silence', "d'Ivoire", 'des Cendres', 'du Dernier Étage', 'de la Rue Basse', 'des Jardins', 'de Minuit', 'des Longs Hivers', 'du Grenier', 'des Départs', 'de la Fenêtre Ouverte'];
@@ -593,7 +598,7 @@ function generateComet(seed, tierId, at) {
   };
 }
 const desig = (c, name) => `C/${c.year} ${c.letter}${c.num} (${name || 'Votre nom'})`;
-const desigHTML = (c, name) => `C/${c.year} ${c.letter}${c.num} <span>(${esc(name || 'Votre nom')})</span>`;
+const desigHTML = (c, name) => `C/${esc(c.year)} ${esc(c.letter)}${esc(c.num)} <span>(${esc(name || 'Votre nom')})</span>`;
 function esc(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
 
 /* ---------- storage ---------- */
@@ -603,8 +608,9 @@ function clearStore() { try { localStorage.removeItem(KEY); } catch (e) { } }
 function loadPending() { try { const raw = sessionStorage.getItem(PENDING_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
 function savePending(p) { try { sessionStorage.setItem(PENDING_KEY, JSON.stringify(p)); } catch (e) { } }
 
+function isValidOwned(d) { const c = d && d.comet; return !!c && typeof c === 'object' && !!TIERS[d.tier] && typeof d.adoptedAt === 'number' && isFinite(d.adoptedAt) && ['seed', 'e', 'hue', 'dust', 'tilt', 'tail'].every(k => typeof c[k] === 'number' && isFinite(c[k])) && c.e > 0 && c.e < 1 && typeof c.year === 'number'; }
 let owned = load(); let pending = loadPending(); let view = 'home';
-if (owned && (!owned.comet || !TIERS[owned.tier])) { owned = null; clearStore(); }
+if (owned && !isValidOwned(owned)) { owned = null; clearStore(); }
 
 /* ---------- orbital timing ---------- */
 function passInfo(o, now) {
@@ -703,10 +709,10 @@ function renderHome() {
   if (owned) { const t = TIERS[owned.tier]; const m = Math.max(1, Math.round((now - owned.adoptedAt) / 60000)); mine = `<li class="mine"><span class="id">N° ${owned.regNum}</span><span class="name">${esc(desig(owned.comet, owned.name))}</span><span class="who">${esc(owned.nick)}</span><span class="gam">${t.name} · vous</span><span class="ago">il y a ${m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' h' : Math.round(m / 1440) + ' j'}</span></li>`; }
   $('#reglist').innerHTML = mine + rows.map(x => x.html).join('');
   $('#reg-counter').firstChild.textContent = (owned ? owned.regNum : base).toLocaleString('fr-FR');
-  $('#regnote').textContent = owned && owned.tier === 'seculaire' ? `La Séculaire a été attribuée. À vous.` : "La Séculaire n'a encore jamais été attribuée.";
+  $('#regnote').textContent = owned && owned.tier === 'seculaire' ? `Extrait du Registre — noms et horaires reconstitués pour la démonstration. La Séculaire a été attribuée. À vous.` : "Extrait du Registre — noms et horaires reconstitués pour la démonstration. La Séculaire, elle, attend toujours.";
   observeReveals();
 }
-document.addEventListener('click', e => { const b = e.target.closest('button[data-tier]'); if (!b) return; pending = { tier: b.dataset.tier, seed: newSeed() }; savePending(pending); location.hash = '#/atelier'; });
+document.addEventListener('click', e => { const b = e.target.closest('button[data-tier]'); if (!b) return; if (owned && !confirm('Vous possédez déjà ' + desig(owned.comet, owned.name) + '. Adopter une nouvelle comète la remplacera et effacera vos capsules et votre journal. Exportez votre fichier .perihelie depuis l\'observatoire avant de continuer. Continuer ?')) return; pending = { tier: b.dataset.tier, seed: newSeed() }; savePending(pending); location.hash = '#/atelier'; });
 
 /* ---------- atelier ---------- */
 let previewComet = null;
@@ -732,7 +738,7 @@ $('#f-name').addEventListener('input', e => { const s = surnameFrom(e.target.val
 $('#f-card').addEventListener('input', e => { const v = e.target.value.replace(/\D/g, '').slice(0, 16); e.target.value = v.replace(/(.{4})/g, '$1 ').trim(); e.target.classList.remove('bad'); $('#f-brand').textContent = v.startsWith('4') ? 'Visa (simulation)' : /^5[1-5]/.test(v) ? 'Mastercard (simulation)' : /^3[47]/.test(v) ? 'American Express (simulation)' : 'Visa · Mastercard · Amex acceptées (simulation)'; });
 $('#f-exp').addEventListener('input', e => { const v = e.target.value.replace(/\D/g, '').slice(0, 4); e.target.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v; e.target.classList.remove('bad'); });
 $('#f-cvc').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); e.target.classList.remove('bad'); });
-$('#f-demo').addEventListener('click', () => { $('#f-card').value = '4242 4242 4242 4242'; $('#f-exp').value = '09 / 29'; $('#f-cvc').value = '424'; if (!$('#f-holder').value) $('#f-holder').value = $('#f-name').value || 'CARTE DE DÉMONSTRATION'; $('#f-brand').textContent = 'Visa (simulation)'; $$('#form input').forEach(i => i.classList.remove('bad')); toast('Carte de démonstration renseignée'); });
+$('#f-demo').addEventListener('click', () => { $('#f-card').value = '4242 4242 4242 4242'; $('#f-exp').value = '09 / ' + String(new Date().getFullYear() + 3).slice(-2); $('#f-cvc').value = '424'; if (!$('#f-holder').value) $('#f-holder').value = $('#f-name').value || 'CARTE DE DÉMONSTRATION'; $('#f-brand').textContent = 'Visa (simulation)'; $$('#form input').forEach(i => i.classList.remove('bad')); toast('Carte de démonstration renseignée'); });
 $('#f-cond-link').addEventListener('click', e => { e.preventDefault(); $('#conditions').classList.toggle('open'); });
 function luhn(v) { let s = 0, alt = false; for (let i = v.length - 1; i >= 0; i--) { let n = +v[i]; if (alt) { n *= 2; if (n > 9) n -= 9; } s += n; alt = !alt; } return s % 10 === 0; }
 $('#form').addEventListener('submit', e => {
@@ -753,7 +759,7 @@ function runProcessing(name) {
 }
 function finalize(name) {
   const t = TIERS[pending.tier]; const c = generateComet(pending.seed, pending.tier); const adoptedAt = Date.now();
-  owned = { v: 1, comet: c, tier: pending.tier, name: surnameFrom(name), fullName: name, nick: c.nick, adoptedAt, regNum: 4813, order: 'PH-' + new Date(adoptedAt).getFullYear() + '-' + String(adoptedAt % 100000).padStart(5, '0'), price: t.price, capsules: [], observed: [] };
+  owned = { v: 1, comet: c, tier: pending.tier, name: surnameFrom(name), fullName: name, nick: c.nick, adoptedAt, regNum: (owned && owned.regNum ? owned.regNum + 1 : 4813), order: 'PH-' + new Date(adoptedAt).getFullYear() + '-' + String(adoptedAt % 100000).padStart(5, '0'), price: t.price, capsules: [], observed: [] };
   if (!save(owned)) toast('Attention : ce navigateur refuse de conserver votre comète (navigation privée ?). Exportez votre certificat.');
   try { sessionStorage.removeItem(PENDING_KEY); } catch (e) { } pending = null; document.body.classList.add('owned');
   $('#f-name').value = ''; $('#f-card').value = ''; $('#f-exp').value = ''; $('#f-cvc').value = ''; $('#f-holder').value = ''; $('#f-ok').checked = false;
@@ -776,12 +782,15 @@ function enterObservatory() {
   owned.lastVisit = now; save(owned);
 }
 function showStatus(a, b, ms) { statusShown = 'absence'; $('#st1').textContent = a; $('#st2').textContent = b; $('#status').classList.add('show'); setTimeout(() => { if (statusShown === 'absence') { statusShown = null; $('#status').classList.remove('show'); } }, ms); }
-function renderObsStatic() { const t = TIERS[owned.tier]; $('#o-desig').innerHTML = desigHTML(owned.comet, owned.name); $('#o-nick').textContent = owned.nick; $('#o-meta').innerHTML = `${t.name} · ${t.short}<br>Adoptée le ${fmtDate(owned.adoptedAt)}<br>Registre n° ${owned.regNum} · ${owned.comet.ra} · ${owned.comet.dec}`; }
-function setPanel(open) { panelOpen = open; $('#panel').classList.toggle('open', open); $('#panel-toggle').textContent = open ? 'Replier ▾' : 'Déplier ▴'; document.documentElement.style.setProperty('--panel-h', ($('#panel').offsetHeight) + 'px'); }
+function renderObsStatic() { const t = TIERS[owned.tier]; $('#o-desig').innerHTML = desigHTML(owned.comet, owned.name); $('#o-nick').textContent = owned.nick; $('#o-meta').innerHTML = `${t.name} · ${t.short}<br>Adoptée le ${fmtDate(owned.adoptedAt)}<br>Registre n° ${esc(owned.regNum)} · ${esc(owned.comet.ra)} · ${esc(owned.comet.dec)}`; }
+function syncPanelH() { document.documentElement.style.setProperty('--panel-h', $('#panel').offsetHeight + 'px'); }
+function setPanel(open) { panelOpen = open; $('#panel').classList.toggle('open', open); $('#panel-toggle').textContent = open ? 'Replier ▾' : 'Déplier ▴'; syncPanelH(); setTimeout(syncPanelH, 560); }
+$('#panel .body').addEventListener('transitionend', syncPanelH); window.addEventListener('resize', syncPanelH);
 $('#panel .tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.tab === '_close') { setPanel(!panelOpen); return; } currentTab = b.dataset.tab; $$('#panel .tabs button').forEach(x => x.classList.toggle('on', x === b)); $$('#panel .pane').forEach(p => p.classList.toggle('on', p.dataset.pane === currentTab)); if (!panelOpen) setPanel(true); });
 function renderJournal() {
   const info = passInfo(owned, Date.now()); const t = TIERS[owned.tier]; const items = [];
-  for (let k = info.count; k >= 1; k--) { const start = owned.adoptedAt + INAUGURAL_DELAY + (k - 1) * t.periodMs; const live = info.inPass && info.index === k; const seen = owned.observed.includes(k); items.push(`<li class="${live ? 'live' : seen ? 'seen' : ''}"><span class="k">Passage n° ${k}${k === 1 ? ' — inaugural' : ''}</span><span class="d">${fmtDateShort(start)}</span><span class="s">${live ? 'En cours' : seen ? 'Observé' : 'Passée en votre absence'}</span></li>`); }
+  const MAX = 50, first = Math.max(1, info.count - MAX + 1); for (let k = info.count; k >= first; k--) { const start = owned.adoptedAt + INAUGURAL_DELAY + (k - 1) * t.periodMs; const live = info.inPass && info.index === k; const seen = owned.observed.includes(k); items.push(`<li class="${live ? 'live' : seen ? 'seen' : ''}"><span class="k">Passage n° ${k}${k === 1 ? ' — inaugural' : ''}</span><span class="d">${fmtDateShort(start)}</span><span class="s">${live ? 'En cours' : seen ? 'Observé' : 'Passé en votre absence'}</span></li>`); }
+  if (first > 1) items.push(`<li><span class="k">…</span><span class="d">${first - 1} passage${first > 2 ? 's' : ''} plus ancien${first > 2 ? 's' : ''}</span><span class="s">Consignés</span></li>`);
   items.push(`<li><span class="k">Adoption</span><span class="d">${fmtDateShort(owned.adoptedAt)}</span><span class="s">Registre n° ${owned.regNum}</span></li>`);
   $('#journal').innerHTML = items.join('');
 }
@@ -792,7 +801,8 @@ function renderCapsules() {
 }
 $('#cap-seal').addEventListener('click', () => { const txt = $('#cap-text').value.trim(); if (!txt) { toast('Écrivez d\'abord quelque chose.'); return; } const info = passInfo(owned, Date.now()); owned.capsules.push({ text: txt, sealedAt: Date.now(), openAt: info.inPass ? info.index + 1 : info.upcoming }); save(owned); $('#cap-text').value = ''; renderCapsules(); toast('Message scellé. Elle vous le rapportera.'); });
 $('#set-save').addEventListener('click', () => { const v = $('#set-nick').value.trim(); if (v.length < 2) { toast('Un petit nom un peu plus long ?'); return; } owned.nick = v; save(owned); renderObsStatic(); toast('Petit nom enregistré'); });
-$('#set-free').addEventListener('click', () => { if (!confirm('Libérer ' + desig(owned.comet, owned.name) + ' ? Elle continuera de revenir, mais sans vous. Cette action efface votre observatoire.')) return; clearStore(); owned = null; document.body.classList.remove('owned', 'imminent'); toast('Elle est partie. Elle reviendra. Sans vous.'); location.hash = '#/'; });
+let freeArmed = false, freeTimer = 0;
+$('#set-free').addEventListener('click', () => { const b = $('#set-free'); if (!freeArmed) { freeArmed = true; b.textContent = 'Confirmer — elle reviendra sans vous'; clearTimeout(freeTimer); freeTimer = setTimeout(() => { freeArmed = false; b.textContent = 'Libérer la comète'; }, 6000); return; } clearTimeout(freeTimer); freeArmed = false; b.textContent = 'Libérer la comète'; clearStore(); owned = null; document.body.classList.remove('owned', 'imminent'); toast('Elle est partie. Elle reviendra. Sans vous.'); location.hash = '#/'; });
 $('#cert-json').addEventListener('click', () => { const blob = new Blob([JSON.stringify({ perihelie: 1, exportedAt: Date.now(), data: owned }, null, 2)], { type: 'application/json' }); dl(blob, `perihelie-${desig(owned.comet, owned.name).replace(/[^\w]+/g, '-')}.perihelie`); toast('Comète exportée. Gardez ce fichier précieusement.'); });
 $('#cert-png').addEventListener('click', () => { (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { const cv = drawCertificate(); cv.toBlob(b => dl(b, `certificat-${desig(owned.comet, owned.name).replace(/[^\w]+/g, '-')}.png`)); toast('Certificat généré'); }); });
 function dl(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000); }
@@ -810,7 +820,7 @@ function drawCertificate() {
   return cv;
 }
 $('#foot-import-link').addEventListener('click', e => { if (owned) return; e.preventDefault(); $('#import-file').click(); });
-$('#import-file').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { const j = JSON.parse(rd.result); const d = j.data || j; if (!d.comet || !TIERS[d.tier] || !d.adoptedAt) throw 0; d.capsules = d.capsules || []; d.observed = d.observed || []; owned = d; save(owned); document.body.classList.add('owned'); toast('Votre comète est de retour dans cet observatoire.'); location.hash = '#/observatoire'; } catch (err) { toast('Ce fichier n\'est pas un certificat Périhélie valide.'); } e.target.value = ''; }; rd.readAsText(f); });
+$('#import-file').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { try { const j = JSON.parse(rd.result); const d = j.data || j; if (!isValidOwned(d)) throw 0; d.name = String(d.name || '').slice(0, 48); d.nick = String(d.nick || d.comet.nick || '').slice(0, 40); d.fullName = String(d.fullName || d.name).slice(0, 48); d.regNum = +d.regNum || 4813; d.capsules = d.capsules || []; d.observed = d.observed || []; owned = d; save(owned); document.body.classList.add('owned'); toast('Votre comète est de retour dans cet observatoire.'); location.hash = '#/observatoire'; } catch (err) { toast('Ce fichier n\'est pas un certificat Périhélie valide.'); } e.target.value = ''; }; rd.readAsText(f); });
 
 function updateObservatory(now) {
   const info = passInfo(owned, now); const t = TIERS[owned.tier];
