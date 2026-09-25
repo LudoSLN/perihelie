@@ -103,12 +103,12 @@ section.block{padding:clamp(90px,14vh,170px) 0;position:relative}
 .counter small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);margin-top:12px}
 .reglist{list-style:none;border-top:1px solid var(--gold-faint)}
 .reglist li{display:grid;grid-template-columns:70px 1.6fr 1fr 1fr .8fr;gap:18px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--gold-faint);font-size:17px}
-.reglist li .id,.reglist li .tier,.reglist li .ago{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.reglist li .id,.reglist li .gam,.reglist li .ago{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
 .reglist li .name{font-style:italic;font-size:20px}
 .reglist li .who{color:var(--ink-dim)}
 .reglist li.mine{color:var(--gold)}
-.reglist li.mine .id,.reglist li.mine .tier,.reglist li.mine .ago,.reglist li.mine .who{color:var(--gold)}
-@media(max-width:720px){.reglist li{grid-template-columns:1fr 1fr;grid-template-areas:"name name" "who tier" "id ago";row-gap:6px}.reglist li .name{grid-area:name}.reglist li .who{grid-area:who}.reglist li .tier{grid-area:tier;text-align:right}.reglist li .id{grid-area:id}.reglist li .ago{grid-area:ago;text-align:right}}
+.reglist li.mine .id,.reglist li.mine .gam,.reglist li.mine .ago,.reglist li.mine .who{color:var(--gold)}
+@media(max-width:720px){.reglist li{grid-template-columns:1fr 1fr;grid-template-areas:"name name" "who tier" "id ago";row-gap:6px}.reglist li .name{grid-area:name}.reglist li .who{grid-area:who}.reglist li .gam{grid-area:tier;text-align:right}.reglist li .id{grid-area:id}.reglist li .ago{grid-area:ago;text-align:right}}
 .regnote{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 
 .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:64px}
@@ -557,7 +557,7 @@ body[data-view="observatoire"] .obs{display:block}
 'use strict';
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const INAUGURAL_DELAY = 90 * 1000, PASS_MS = 45 * 1000, KEY = 'perihelie.comet.v1', PENDING_KEY = 'perihelie.pending.v1';
-const DAY = 86400000, YEAR = 365.25 * DAY;
+const DAY = 86400000, YEAR = 365 * DAY;
 const TIERS = {
   ephemere: { id: 'ephemere', name: 'Éphémère', price: 39, periodMs: 11 * 60 * 1000, short: 'toutes les 11 minutes', long: 'Revient toutes les 11 minutes', desc: "Pour ceux qui n'aiment pas attendre. Elle revient avant même que vous ayez eu le temps de l'oublier.", stock: 'Série ouverte' },
   vesperale: { id: 'vesperale', name: 'Vespérale', price: 190, periodMs: DAY, short: 'chaque jour, à la même heure', long: "Revient chaque jour, à l'heure exacte de votre adoption", desc: 'Un rendez-vous quotidien. Le même, toute votre vie. À la seconde près.', stock: 'Série limitée' },
@@ -615,7 +615,7 @@ function passInfo(o, now) {
 }
 function kepler(phase, e) { const M = ((phase % 1) + 1) % 1 * 2 * Math.PI; let E = M; for (let i = 0; i < 10; i++) E -= (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E)); return { x: Math.cos(E) - e, y: Math.sqrt(1 - e * e) * Math.sin(E) }; }
 function fmtCountdown(ms) {
-  if (ms < 0) ms = 0; let s = Math.floor(ms / 1000); const y = Math.floor(s / (365.25 * 86400)); s -= Math.floor(y * 365.25 * 86400); const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
+  if (ms < 0) ms = 0; let s = Math.floor(ms / 1000); const y = Math.floor(s / (365 * 86400)); s -= y * 365 * 86400; const d = Math.floor(s / 86400); s -= d * 86400; const h = Math.floor(s / 3600); s -= h * 3600; const m = Math.floor(s / 60); s -= m * 60;
   const hms = `${pad(h)}:${pad(m)}:${pad(s)}`;
   if (y > 0) return `${y} <small>an${y > 1 ? 's' : ''}</small> ${d} <small>j</small> ${hms}`;
   if (d > 0) return `${d} <small>j</small> ${hms}`;
@@ -698,9 +698,9 @@ function renderHome() {
   const tiersEl = $('#tiers');
   if (!tiersEl.children.length) tiersEl.innerHTML = Object.values(TIERS).map((t, i) => `<div class="tier ${t.unique ? 'unique' : ''} reveal d${i}"><div class="t-name">${t.name}</div><div class="t-period">${t.long}</div><div class="t-desc">${t.desc}</div><div class="t-stock">${t.stock}</div><div class="t-price">${fmtPrice(t.price)}<small>TTC</small></div><button class="btn ${t.unique ? 'primary' : ''}" data-tier="${t.id}">Découvrir ma comète <span class="arrow">→</span></button></div>`).join('');
   const r = rng(4812); const now = Date.now(); const agos = [3, 11, 26, 58, 140, 310, 770, 1500]; const tiersArr = ['ephemere', 'vesperale', 'ephemere', 'annuelle', 'vesperale', 'ephemere', 'ephemere', 'vesperale'];
-  const base = 4812; let rows = agos.map((m, i) => { const c = generateComet(r.int(1, 1e9), tiersArr[i], now - m * 60000); const s = r.pick(SURNAMES); return { id: base - i, html: `<li><span class="id">N° ${base - i}</span><span class="name">${desig(c, s)}</span><span class="who">${c.nick}</span><span class="tier">${TIERS[tiersArr[i]].name}</span><span class="ago">il y a ${m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' h' : Math.round(m / 1440) + ' j'}</span></li>` }; });
+  const base = 4812; let rows = agos.map((m, i) => { const c = generateComet(r.int(1, 1e9), tiersArr[i], now - m * 60000); const s = r.pick(SURNAMES); return { id: base - i, html: `<li><span class="id">N° ${base - i}</span><span class="name">${desig(c, s)}</span><span class="who">${c.nick}</span><span class="gam">${TIERS[tiersArr[i]].name}</span><span class="ago">il y a ${m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' h' : Math.round(m / 1440) + ' j'}</span></li>` }; });
   let mine = '';
-  if (owned) { const t = TIERS[owned.tier]; const m = Math.max(1, Math.round((now - owned.adoptedAt) / 60000)); mine = `<li class="mine"><span class="id">N° ${owned.regNum}</span><span class="name">${esc(desig(owned.comet, owned.name))}</span><span class="who">${esc(owned.nick)}</span><span class="tier">${t.name} · vous</span><span class="ago">il y a ${m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' h' : Math.round(m / 1440) + ' j'}</span></li>`; }
+  if (owned) { const t = TIERS[owned.tier]; const m = Math.max(1, Math.round((now - owned.adoptedAt) / 60000)); mine = `<li class="mine"><span class="id">N° ${owned.regNum}</span><span class="name">${esc(desig(owned.comet, owned.name))}</span><span class="who">${esc(owned.nick)}</span><span class="gam">${t.name} · vous</span><span class="ago">il y a ${m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' h' : Math.round(m / 1440) + ' j'}</span></li>`; }
   $('#reglist').innerHTML = mine + rows.map(x => x.html).join('');
   $('#reg-counter').firstChild.textContent = (owned ? owned.regNum : base).toLocaleString('fr-FR');
   $('#regnote').textContent = owned && owned.tier === 'seculaire' ? `La Séculaire a été attribuée. À vous.` : "La Séculaire n'a encore jamais été attribuée.";
@@ -770,7 +770,7 @@ function playReveal() {
 /* ---------- observatory ---------- */
 let lastCd = '', statusShown = null, panelOpen = true, currentTab = 'journal';
 function enterObservatory() {
-  renderObsStatic(); renderJournal(); renderCapsules(); $('#set-nick').value = owned.nick; setPanel(true);
+  renderObsStatic(); renderJournal(); renderCapsules(); $('#set-nick').value = owned.nick; setPanel(window.innerWidth > 720);
   const now = Date.now(), last = owned.lastVisit; const info = passInfo(owned, now);
   if (last && now - last > 60000 && !info.inPass) { const missed = info.count - passInfo(owned, last).count; const km = 31 * (now - last) / 1000; const kmTxt = km >= 1e6 ? (km / 1e6).toLocaleString('fr-FR', { maximumFractionDigits: 1 }) + ' millions de km' : Math.round(km).toLocaleString('fr-FR') + ' km'; showStatus('Depuis votre dernière visite', `Elle a parcouru ${kmTxt}. ` + (missed > 0 ? `Elle est passée ${missed} fois sans vous.` : 'Elle vous attendait.'), 8000); }
   owned.lastVisit = now; save(owned);
@@ -819,7 +819,7 @@ function updateObservatory(now) {
     if (!owned.observed.includes(info.index)) { owned.observed.push(info.index); save(owned); renderJournal(); renderCapsules(); }
     const cd = 'EN COURS'; if (lastCd !== cd) { lastCd = cd; $('#cd-label').textContent = `Passage n° ${info.index}${info.index === 1 ? ' — inaugural' : ''}`; $('#cd').innerHTML = cd; $('#cd-sub').textContent = 'Levez les yeux'; }
     const key = info.progress < .42 ? 'a' : info.progress < .6 ? 'b' : 'c';
-    if (statusShown !== key) { statusShown = key; const st = $('#status'); if (key === 'a') { $('#st1').textContent = info.index === 1 ? 'Passage inaugural' : 'Passage n° ' + info.index; $('#st2').textContent = 'Elle est là.'; st.classList.add('show'); } else if (key === 'b') { $('#st1').textContent = 'Périhélie'; $('#st2').textContent = 'Au plus près. Maintenant.'; st.classList.add('show'); } else { $('#st1').textContent = 'Elle s\'éloigne'; $('#st2').textContent = info.count === 1 && owned.tier === 'seculaire' ? 'À dans 76 ans.' : 'Elle reviendra.'; st.classList.add('show'); } }
+    if (statusShown !== key) { statusShown = key; const st = $('#status'); if (key === 'a') { if (panelOpen && W < 720) setPanel(false); $('#st1').textContent = info.index === 1 ? 'Passage inaugural' : 'Passage n° ' + info.index; $('#st2').textContent = 'Elle est là.'; st.classList.add('show'); } else if (key === 'b') { $('#st1').textContent = 'Périhélie'; $('#st2').textContent = 'Au plus près. Maintenant.'; st.classList.add('show'); } else { $('#st1').textContent = 'Elle s\'éloigne'; $('#st2').textContent = info.count === 1 && owned.tier === 'seculaire' ? 'À dans 76 ans.' : 'Elle reviendra.'; st.classList.add('show'); } }
     document.body.classList.add('imminent');
   } else {
     drawOrbit(ctx, owned.comet, info.phase, W, H, { scale: W < 700 ? .3 : .34, rot: owned.comet.tilt * .2 });
