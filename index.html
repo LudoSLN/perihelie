@@ -727,7 +727,7 @@ $('#f-cond-link').addEventListener('click', e => { e.preventDefault(); $('#condi
 function luhn(v) { let s = 0, alt = false; for (let i = v.length - 1; i >= 0; i--) { let n = +v[i]; if (alt) { n *= 2; if (n > 9) n -= 9; } s += n; alt = !alt; } return s % 10 === 0; }
 $('#form').addEventListener('submit', e => {
   e.preventDefault(); const err = $('#f-err'); const bad = []; const name = $('#f-name').value.trim(); const card = $('#f-card').value.replace(/\s/g, ''); const exp = $('#f-exp').value.replace(/\D/g, ''); const cvc = $('#f-cvc').value;
-  if (name.length < 2) bad.push(['#f-name', 'Un nom est nécessaire : c'est lui que nous gravons.']);
+  if (name.length < 2) bad.push(['#f-name', "Un nom est nécessaire : c'est lui que nous gravons."]);
   if (card.length < 15 || !luhn(card)) bad.push(['#f-card', 'Le numéro de carte semble incorrect (utilisez la carte de démonstration).']);
   if (exp.length !== 4 || +exp.slice(0, 2) < 1 || +exp.slice(0, 2) > 12 || (2000 + +exp.slice(2)) < new Date().getFullYear()) bad.push(['#f-exp', "La date d'expiration est invalide."]);
   if (cvc.length < 3) bad.push(['#f-cvc', 'Le cryptogramme comporte 3 chiffres.']);
